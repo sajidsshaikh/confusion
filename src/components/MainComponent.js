@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
 import Menu from './MenuComponent';
 import Dishes from '../shared/dishes'
 import DishDetail from './DishDetailComponent';
+import Header from './HeaderComponent';
+import Footer from './FooterComponent';
 
 class Main extends Component {
   constructor (props) {
@@ -21,15 +22,12 @@ class Main extends Component {
   render () {
     return (
       <div>
-        <Navbar dark color="primary">
-          <div className="container">
-            <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
-          </div>
-        </Navbar>
-        {/* Here we are creating a new property call onClick and then to it we are passing a function */}
+        <Header></Header>
+        {/* Here we are creating a new property call menuClick and then to it we are passing a function */}
         <Menu dishes={this.state.dishes}
               menuClick={(dishId) => this.onDishSelect(dishId)}></Menu>
         <DishDetail dishdetail={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]}/>
+        <Footer></Footer>
       </div>
     );
   }
