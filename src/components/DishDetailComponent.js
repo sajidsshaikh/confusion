@@ -1,8 +1,9 @@
 import React from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle,Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function DishDetail(props) {
-    const listItems = props.dishdetail.comments.map((item) => {
+    const listItems = props.comments.map((item) => {
         return(
             <ul key={item.id}> 
                 <li>{item.comment}</li>
@@ -15,12 +16,25 @@ function DishDetail(props) {
     });
     return (
         <div className="container">
-            <div key={props.dishdetail.id} className="col-12 col-md-5 mt-5"> 
+             <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem>
+                        <Link to="/home">Home</Link>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem>
+                        <Link to="/menu">Menu</Link>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem active>
+                        {props.dishdetail[0].name}
+                    </BreadcrumbItem>
+                </Breadcrumb>
+            </div>
+            <div key={props.dishdetail[0].id} className="col-12 col-md-5 mt-5"> 
                 <Card>
-                    <CardImg width="100%" src={props.dishdetail.image}></CardImg>
+                    <CardImg width="100%" src={props.dishdetail[0].image}></CardImg>
                     <CardBody>
-                        <CardTitle>{props.dishdetail.name}</CardTitle>
-                        <CardText>{props.dishdetail.description}</CardText>
+                        <CardTitle>{props.dishdetail[0].name}</CardTitle>
+                        <CardText>{props.dishdetail[0].description}</CardText>
                     </CardBody>
                 </Card>
                 <Card>
@@ -29,8 +43,7 @@ function DishDetail(props) {
                     {listItems}
                     </CardBody>
                 </Card>
-                
-            </div>  
+           </div>  
         </div> 
     );
 

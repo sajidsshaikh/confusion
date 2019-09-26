@@ -9,6 +9,7 @@ import Contact from './ContactComponent';
 import { COMMENTS } from '../shared/comments';
 import { LEADERS } from '../shared/leaders';
 import { PROMOTIONS } from '../shared/promotions';
+import DishDetail from './DishDetailComponent';
 
 class Main extends Component {
   constructor (props) {
@@ -37,6 +38,21 @@ class Main extends Component {
         />
       );
     }
+
+    const DishWithId = ({match}) => {
+        return(
+          <DishDetail dishdetail={this.state.dishes.filter((dish) => {
+              console.log('Getting DishId :' + match.params.dishId + ' DishId :' + dish.id);
+              return dish.id === parseInt(match.params.dishId, 10);
+            }
+          )}
+            comments={this.state.comments.filter((comment) => {
+              console.log('Getting Comment :' + match.params.dishId);
+              return comment.dishId === parseInt(match.params.dishId, 10);
+            })}
+          />
+        );
+    }
     return (
       <div>
         <Header></Header>
@@ -48,6 +64,7 @@ class Main extends Component {
         <Switch>
           <Route  path="/home" component={HomePage} />
           <Route  exact path="/menu" component={() => <Menu dishes={this.state.dishes} />}/>
+          <Route path="/menu/:dishId" component={DishWithId}/>
           <Route exact path="/contactus" component={Contact} />
           <Redirect to="/home"/>
         </Switch>
