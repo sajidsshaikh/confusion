@@ -55,11 +55,13 @@ class Main extends Component {
         );
     }
 
-    const AboutWithLeader = () => {
+    /**
+     * Pass a component
+     * const AboutWithLeader = () => {
       return(
         <About leaders={this.state.leaders}/>
       );
-    }
+    }*/
     return (
       <div>
         <Header></Header>
